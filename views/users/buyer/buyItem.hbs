@@ -1,0 +1,36 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="card bg-secondary text-white mb-3">
+                <div class="card-body ">
+                    <article class="mb-3">
+                        <h3 class="card-title">
+                            Product name: {{product.name}}
+                        </h3>
+                        <p class="card-text">
+                            Price: {{product.price}}
+                        </p>
+                        <p class="card-text">
+                            By: {{product.seller_username}}
+                        </p>
+                    </article>
+                    <div>
+                        <h3 class="d-block mb-3 mt-3">Buy</h3>
+                        <form action="/user/buyer/products/buy/{{product.prod_id}}" method="POST">
+                            <label for="fquantity">Quantity to buy</label>
+                            <input type="number" class="form-control mb-3" id="fquantity" placeholder="Quantity" name="quantity">
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                            <a href="/user/buyer/products/view/{{product.prod_id}}" class="btn btn-info">Go back to product</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="/user/" class="btn btn-primary mr-3">Go back to the dashboard</a>
+                <a href="/user/buyer/products/view/all" class="btn btn-info">Go back to all products</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</main>

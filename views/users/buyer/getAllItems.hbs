@@ -1,0 +1,45 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div id="app" class="row mb-3">
+                <template v-if='products.length < 1'>
+                    <h3>Oh looks like you dont have any items</h3>
+                </template>
+                <template v-else>
+                    <b-card
+                    v-for='product in products'
+                    :title='product.name'
+                    class="bg-secondary col-3 mt-3 mb-3"
+                    >
+                        <b-card-text>
+                            <article>
+                                <span class="d-block">Price: \{{product.price}}</span>
+                                <span class="d-block">By: \{{product.seller_username}}</span>
+                            </article>
+                        </b-card-text>
+                        <b-card-text>
+                            <a :href="`/user/buyer/products/view/${product.prod_id}`" class="btn btn-info">View product</a>
+                            <a :href="`/user/buyer/products/buy/${product.prod_id}`" class="btn btn-primary">Buy Product</a>
+                        </b-card-text>
+                    </b-card>
+                </template>
+            </div>
+            <div class="row">
+                <a href="/user/" class="btn btn-primary">Go back to dashboard</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</main>
+
+{{#section 'scripts'}}
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            products: {{{products}}}
+        }
+    });
+</script>
+{{/section}}
