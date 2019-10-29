@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{!-- Adding Bootstrap-Vue --}}
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="//unpkg.com/vue@latest/dist/vue.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>{{title}}</title>
+</head>
+<body class="bg-dark text-white">
+    <header class="container-fluid bg-secondary mb-3">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+                    {{#if user}}
+                    <a href="/user/" class="navbar-brand">Welcome {{user.username}}</a>
+                    <div class="d-block ml-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="/user/seller/products/view/all" class="nav-link text-white">View all products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/user/seller/products/add" class="nav-link text-white">Add a product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-white">Buy a product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-white">Cart items</a> 
+                            </li>
+                            <li class="nav-item">
+                                <button form="logout_form" class="btn btn-primary" type="submit">Logout</button>
+                                <form action="/account/logout" method="POST" id="logout_form"></form>
+                            </li> 
+                        </ul>
+                    </div>
+                    {{else}}
+                    <a href="/" class="navbar-brand">CH Store</a>
+                    <div class="d-block ml-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="/account/login" class="nav-link text-white">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/account/create" class="nav-link text-white">Create an account</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {{/if}}
+                </nav>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </header>
+    {{{body}}}
+
+    {{{_sections.scripts}}}
+</body>
+</html>

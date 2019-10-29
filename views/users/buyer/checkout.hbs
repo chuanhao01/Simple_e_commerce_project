@@ -1,0 +1,70 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div id="app" class="row mb-3">
+                <template v-if='cart.length < 1'>
+                    <h3>Oh looks like you do not have any items in your cart</h3>
+                </template>
+                <template v-else>
+                    <article class="d-block text-center w-100">
+                        <h2>Checkout</h2>
+                    </article>
+                    <b-card
+                    v-for='item in cart'
+                    :title='item.name'
+                    class="bg-secondary col-3 mt-3 mb-3"
+                    >
+                        <b-card-text>
+                            <article>
+                                <span class="d-block">Price per: \{{item.price}}</span>
+                                <span class="d-block">Quantity: \{{item.quantity}}</span>
+                                <span class="d-block">Total Price: \{{item.price * item.quantity}}</span>
+                            </article>
+                        </b-card-text>
+                    </b-card>
+                    <b-card
+                    title='Total cost'
+                    class="w-100 col-12 bg-info">
+                        <b-card-text>
+                            <article class="d-block w-100 text-left">
+                                <pre v-for='item in cart' class="text-left d-block text-white" style='font-size: 2em' v-html='`${`${item.name}`.padEnd(25)} ${item.price * item.quantity}`'>
+
+                                </pre>
+                                <span class="d-block display-4">Total cost: \{{totalCost}}</span>
+                            </article>
+                        </b-card-text>
+                    </b-card>
+                </template>
+            </div>
+            <div class="row">
+                <a href="/user/buyer/cart" class="btn btn-danger mr-2">Go back to cart</a>
+                <button class="btn btn-success" form="fcheckout">Checkout and pay</button>
+                <form action="/user/buyer/checkout" id="fcheckout" method="POST">
+        
+                </form>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</main>
+
+{{#section 'scripts'}}
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            cart: {{{buyer_cart}}}
+        },
+        computed: {
+            totalCost(){
+                let total_cost = 0;
+                for(let item of this.cart){
+                    total_cost += item.price * item.quantity;
+                }
+                return total_cost;
+            }
+        },
+    });
+</script>
+{{/section}}

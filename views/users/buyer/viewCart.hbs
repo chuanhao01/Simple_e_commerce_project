@@ -1,0 +1,53 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div id="app" class="row mb-3">
+                <template v-if='cart.length < 1'>
+                    <h3>Oh looks like you do not have any items in your cart</h3>
+                </template>
+                <template v-else>
+                    <article class="d-block text-center w-100">
+                        <h2>Your cart</h2>
+                    </article>
+                    <b-card
+                    v-for='item in cart'
+                    :title='item.name'
+                    class="bg-secondary col-3 mt-3 mb-3"
+                    >
+                        <b-card-text>
+                            <article>
+                                <span class="d-block">Price: \{{item.price}}</span>
+                                <span class="d-block">By: \{{item.seller_username}}</span>
+                                <span class="d-block">Buying: \{{item.quantity}}</span>
+                            </article>
+                        </b-card-text>
+                        <b-card-text>
+                            <button type="submit" form="fdelete" class="btn btn-danger">Delete Item from cart</button>
+                            <form action="/user/buyer/remove" id="fdelete" method="POST">
+                                <input type="hidden" name="prod_id" :value="item.prod_id"> 
+                            </form>
+                        </b-card-text>
+                    </b-card>
+                </template>
+            </div>
+            <div class="row">
+                <a href="/user/" class="btn btn-primary mr-2">Go back to dashboard</a>
+                <a href="/user/buyer/products/view/all" class="btn btn-info mr-2">Look at other products</a>
+                <a href="/user/buyer/checkout" class="btn btn-success">Proceed to checkout</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</main>
+
+{{#section 'scripts'}}
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            cart: {{{buyer_cart}}}
+        }
+    });
+</script>
+{{/section}}
