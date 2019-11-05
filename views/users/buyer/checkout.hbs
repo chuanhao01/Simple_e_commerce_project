@@ -22,6 +22,11 @@
                                 <span class="d-block">Total Price: \{{item.price * item.quantity}}</span>
                             </article>
                         </b-card-text>
+                        <b-card-text>
+                            <article>
+                                <span class="d-block">Sold by: \{{item.seller_username}}</span>
+                            </article>
+                        </b-card-text>
                     </b-card>
                     <b-card
                     title='Total cost'
@@ -40,8 +45,8 @@
             <div class="row">
                 <a href="/user/buyer/cart" class="btn btn-danger mr-2">Go back to cart</a>
                 <button class="btn btn-success" form="fcheckout">Checkout and pay</button>
+
                 <form action="/user/buyer/checkout" id="fcheckout" method="POST">
-        
                 </form>
             </div>
         </div>

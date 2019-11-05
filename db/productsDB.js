@@ -35,7 +35,7 @@ const productsDB = {
     getProductById(prod_id){
         return new Promise((resolve, reject) => {
             this.pool.query(`
-            SELECT p.prod_id, p.name, p.price, u.username AS seller_username FROM products p
+            SELECT p.prod_id, p.name, p.price, p.quantity, u.username AS seller_username FROM products p
             INNER JOIN users u
             ON p.seller_id = u.user_id 
             WHERE p.prod_id = ?

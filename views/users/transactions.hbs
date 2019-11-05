@@ -1,0 +1,78 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div id="app" class="row mb-3">
+                <template v-if='transactions.length < 1'>
+                    <h3>Oh looks like you do not have any items in your cart</h3>
+                </template>
+                <template v-else>
+                    <b-card
+                    v-for='(transaction_items, transaction_id) in transactions'
+                    class="bg-secondary col-6 mt-3 mb-3"
+                    :title='`Transaction ${transaction_id}`'
+                    >
+                        <b-card-text>
+                            <article>
+                                <span class="d-block">Transaction made on \{{formatTime(transaction_items[0].timestamp)}}</span>
+                                <span class="d-block">Total cost: \{{getTotalCost(transaction_items)}}</span>
+                            </article>
+                        </b-card-text>
+                        <b-card-text>
+                            <b-card
+                            v-for='transaction_item in transaction_items'
+                            class="bg-info mb-2"
+                            >
+                                <b-card-text>
+                                    <article>
+                                        <span class="d-block">Name: \{{transaction_item.name}}</span>
+                                        <span class="d-block">Price per item: \{{transaction_item.price}}</span>
+                                        <span class="d-block">Sold By: \{{transaction_item.seller_username}}</span>
+                                        <span class="d-block">Quantity of items bought: \{{transaction_item.quantity}}</span>
+                                    </article>
+                                </b-card-text>
+                            </b-card>
+                        </b-card-text>
+                    </b-card>
+                </template>
+            </div>
+            <div class="row">
+                <a href="/user/" class="btn btn-primary mr-2">Go back to dashboard</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</main>
+
+{{#section 'scripts'}}
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            transactions: {{{transactions}}}
+        },
+        methods: {
+            formatTime(time_str){
+                let new_time = moment(time_str);
+                return new_time.format('Do MMM YYYY HH:mm');
+            },
+            getTotalCost(transaction_items){
+                let total_cost = 0;
+                for(let item of transaction_items){
+                    total_cost += item.price * item.quantity;
+                }
+                return total_cost;
+            }
+        },
+        created(){
+            if(this.transactions.length > 0){
+                this.transactions = this.transactions.reduce((rv, x) => {
+                    rv[x.transaction_id] = rv[x.transaction_id] || [];
+                    rv[x.transaction_id].push(x);
+                    return rv;
+                }, {});
+            }            
+        },
+    });
+</script>
+{{/section}}

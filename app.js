@@ -50,6 +50,9 @@ app.use(function(req, res, next){
     next();
 });
 
+// Setting up user middleware for paths
+app.use(require('./middlewares/path_auth'));
+
 // Getting controllers
 const controllers = require('./controllers/index');
 

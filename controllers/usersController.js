@@ -2,10 +2,22 @@ const dataAccess = require('../db/index');
 
 const usersController = {
     init(app){
+        // Home page for users
         app.get('/user', function(req, res){
             res.render('users/userHome', {
                 title: `${req.user.username} Home page`,
             });
+        });
+        // Transactions
+        app.get('/user/transactions', function(req, res){
+            dataAccess.transactions.getUserTransactionHistory(req.user.user_id).then(
+                function(transactions){
+                    res.render('users/transactions', {
+                        'title': "Showing your past transactions",
+                        'transactions': JSON.stringify(transactions),
+                    });
+                }
+            );
         });
         // Seller
         // Get all products
@@ -130,17 +142,51 @@ const usersController = {
                 }
             );
         });
+        // Clearing cart items
+        app.post('/user/buyer/clearCart', function(req, res){
+            dataAccess.cart.clearBuyerCart(req.user.user_id).then(
+                function(){
+                    res.redirect('/user/buyer/cart');
+                }
+            );
+        });
         // Checkout
         app.get('/user/buyer/checkout', function(req, res){
             dataAccess.cart.getBuyerCartItems(req.user.user_id).then(
                 function(cart_items){
-                    res.render('users/buyer/checkout', {
-                        'title': 'Checkout',
-                        'buyer_cart': JSON.stringify(cart_items),
-                    });
+                    if(cart_items.length > 0){
+                        res.render('users/buyer/checkout', {
+                            'title': 'Checkout',
+                            'buyer_cart': JSON.stringify(cart_items),
+                        });
+                    }
+                    else{
+                        res.redirect('/user/buyer/cart');
+                    }                    
                 }
             );
         });
+        app.post('/user/buyer/checkout', function(req, res){
+            dataAccess.cart.getBuyerCartItems(req.user.user_id).then(
+                function(cart){
+                    if(cart.length > 0){
+                        dataAccess.transactions.checkoutCartByUser(req.user.user_id, cart).then(
+                            function(){
+                                dataAccess.cart.clearBuyerCart(req.user.user_id).then(
+                                    function(){
+                                        res.redirect('/user/transactions');
+                                    }
+                                );
+                            }
+                        );
+                    }
+                    else{
+                        res.redirect('/user/buyer/cart');
+                    }
+                }
+            );
+        });
+        
     },
 };
 
