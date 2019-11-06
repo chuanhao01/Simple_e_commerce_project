@@ -70,16 +70,111 @@ After this all you need to do to run the server is to type: `npm start` in the t
 
 ## More details  
 
+This should how your file directories should look like.
 ```bash
 .
 ├── app.js
 ├── controllers
+│   └── ...
 ├── db
+│   └── ...
 ├── middlewares
+│   └── ...
 ├── package.json
 ├── package-lock.json
 ├── read_content
 ├── README.md
 ├── SQL for restful api.sql
 └── views
+    ├── account
+    │   └── ...
+    ├── error
+    │   └── ...
+    ├── home
+    │   └── ...
+    ├── layouts
+    │   └── ...
+    ├── partials (empty)
+    └── users
+    │   └── ...
 ```
+
+### Breif description
+
+The `app.js` file is the main file that runs the server. In it, the files calls the other dependencies and file in order for the server to start.
+
+The files in `controllers` are seperated in the way below.  
+The respective controllers are used as both the routing mechanism and logic control depending on the type of request recieved.
+```bash
+controllers/
+├── accountController.js
+├── apiController.js
+├── homeController.js
+├── index.js
+└── usersController.js
+```
+
+The files in `db` contains the main JS logic connecting the back-end express server to the MySQL database.
+Note: The main wrapper object is in `index.js`, accessed through the `dataAccess` object.
+```bash
+db/
+├── cartDB.js
+├── index.js
+├── productsDB.js
+├── transactionsDB.js
+└── usersDB.js
+```
+
+In `index.js`
+
+```javascript
+...
+...
+const dataAccess = {
+    products: productsDB,
+    users: usersDB,
+    cart: cartDB,
+    transactions: transactionsDB,
+};
+
+module.exports = dataAccess;
+```
+
+The files in `middleware` contain the middleware used in the main `app.js`.  
+These include the local implementation of passportJS and authenticating the request paths.  
+```bash
+middlewares/
+├── passport.js
+└── path_auth.js
+```
+
+The `views` folder contains the views that would be loaded by express-handlebars as the html seend by the user. In the folder, there are multiple sub folders for the respective controllers and paths.  
+
+```bash
+views/
+├── account
+│   ├── createAccount.hbs
+│   └── loginAccount.hbs
+├── error
+│   └── 403.hbs
+├── home
+│   └── landing.hbs
+├── layouts
+│   └── main.hbs
+├── partials
+└── users
+    ├── buyer
+    │   ├── buyItem.hbs
+    │   ├── checkout.hbs
+    │   ├── getAllItems.hbs
+    │   ├── viewCart.hbs
+    │   └── viewItem.hbs
+    ├── seller
+    │   ├── addItem.hbs
+    │   ├── editItem.hbs
+    │   ├── getAllItems.hbs
+    │   └── getItem.hbs
+    ├── transactions.hbs
+    └── userHome.hbs
+```
+
