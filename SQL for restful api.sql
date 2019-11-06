@@ -27,10 +27,18 @@ CREATE TABLE IF NOT EXISTS cart(
     PRIMARY KEY(buyer_id, prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS transactions(
-	buyer_id VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS transactions_history(
+	transaction_id VARCHAR(255) NOT NULL,
+    buyer_id VARCHAR(255) NOT NULL,
+    timestamp VARCHAR(255) NOT NULL,
+    PRIMARY KEY (transaction_id)
+);
+
+CREATE TABLE IF NOT EXISTS transactions_items(
+	transaction_id VARCHAR(255) NOT NULL,
     prod_id VARCHAR(255) NOT NULL,
     quantity INT(255) NOT NULL,
-    timestamp VARCHAR(255) NOT NULL,
-    PRIMARY KEY(buyer_id, prod_id , timestamp)
+    FOREIGN KEY (transaction_id)
+    REFERENCES transactions_history(transaction_id),
+    PRIMARY KEY(transaction_id, prod_id)
 );
