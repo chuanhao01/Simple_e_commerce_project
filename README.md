@@ -4,6 +4,7 @@ This was a project I did as I learnt full-stack web development.
 
 This project was done with NodeJS running the backend and MySQL running the database.  
 Technologies used:  
+
 | Stack componoent|Technology|
 |:---|:---|
 |Front-End|HTML, CSS, JS Bootstrap-Vue, VueJS|
