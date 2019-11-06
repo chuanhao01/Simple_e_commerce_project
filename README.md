@@ -78,6 +78,7 @@ This should how your file directories should look like.
 │   └── ...
 ├── db
 │   └── ...
+├── LICENSE.md
 ├── middlewares
 │   └── ...
 ├── package.json
@@ -96,7 +97,7 @@ This should how your file directories should look like.
     │   └── ...
     ├── partials (empty)
     └── users
-    │   └── ...
+        └── ...
 ```
 
 ### Breif description
@@ -177,4 +178,8 @@ views/
     ├── transactions.hbs
     └── userHome.hbs
 ```
+
+# LICENSE
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
