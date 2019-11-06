@@ -5,7 +5,7 @@ This was a project I did as I learnt full-stack web development.
 This project was done with NodeJS running the backend and MySQL running the database.  
 Technologies used:  
 | Stack componoent|Technology|
-|:-------------|:-------------|
+|:---|:---|
 |Front-End|HTML, CSS, JS Bootstrap-Vue, VueJS|
 |Back-End|ExpressJS (running off NodeJS), express-handlebars (view engine),<br>mysql (JS lib to talk to MySQL database), passportJS (authentication)|
 |Database|MySQL|
