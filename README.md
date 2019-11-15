@@ -21,7 +21,7 @@ Prerequisites:
 - NodeJS
 - MySQL
 
-Note: I recommend using MySQL workbench in conjunction with just MySQL from the terminal.
+Note: I recommend using MySQL workbench in conjuction with just MySQL from the terminal.
 
 To start setting up the env, you can run these commands:
 ```bash
@@ -30,10 +30,10 @@ cd Simple_e_commerce_project
 npm i
 ```
 
-With this, all the required node packages will be installed.  
-Then run the queries in `SQL for restful api.sql` file in SQL.
+With this all the required node packages wil be installed.  
+Then run the queries in `SQL for restful api.sql` file in sql.
 
-Lastly, note that you have to set up the MySQL connection, `MysqlUser` and `MysqlPassword`, and the `CookiePassword`. (Filename and code snippet are shown below).
+Lastly note that you have to set up the mysql connection, `MysqlUser` and `MysqlPassword`, and the `CookiePassword`. (File name and code sinppet shown below).
 
 `db/index.js`
 ```javascript
@@ -75,12 +75,12 @@ This should how your file directories should look like.
 .
 ├── app.js
 ├── controllers
-│   └── ...
+│   └── ...
 ├── db
-│   └── ...
+│   └── ...
 ├── LICENSE.md
 ├── middlewares
-│   └── ...
+│   └── ...
 ├── package.json
 ├── package-lock.json
 ├── read_content
@@ -88,24 +88,24 @@ This should how your file directories should look like.
 ├── SQL for restful api.sql
 └── views
     ├── account
-    │   └── ...
+    │   └── ...
     ├── error
-    │   └── ...
+    │   └── ...
     ├── home
-    │   └── ...
+    │   └── ...
     ├── layouts
-    │   └── ...
+    │   └── ...
     ├── partials (empty)
     └── users
-        └── ...
+        └── ...
 ```
 
 #### Breif descriptions
 
-The `app.js` file is the main file that runs the server. In it, the file calls the other dependencies and files for the server to start.
+The `app.js` file is the main file that runs the server. In it, the files calls the other dependencies and file in order for the server to start.
 
-The files in `controllers` are separated in the way below.  
-The respective controllers are used as both the routing mechanism and logic control depending on the type of request received.
+The files in `controllers` are seperated in the way below.  
+The respective controllers are used as both the routing mechanism and logic control depending on the type of request recieved.
 ```bash
 controllers/
 ├── accountController.js
@@ -115,7 +115,7 @@ controllers/
 └── usersController.js
 ```
 
-The files in `db` contain the main JS logic connecting the back-end express server to the MySQL database.
+The files in `db` contains the main JS logic connecting the back-end express server to the MySQL database.
 Note: The main wrapper object is in `index.js`, accessed through the `dataAccess` object.
 ```bash
 db/
@@ -149,32 +149,32 @@ middlewares/
 └── path_auth.js
 ```
 
-The `views` folder contains the views that would be loaded by express-handlebars as the HTML seen by the user. In the folder, there are multiple subfolders for the respective controllers and paths.  
+The `views` folder contains the views that would be loaded by express-handlebars as the html seend by the user. In the folder, there are multiple sub folders for the respective controllers and paths.  
 
 ```bash
 views/
 ├── account
-│   ├── createAccount.hbs
-│   └── loginAccount.hbs
+│   ├── createAccount.hbs
+│   └── loginAccount.hbs
 ├── error
-│   └── 403.hbs
+│   └── 403.hbs
 ├── home
-│   └── landing.hbs
+│   └── landing.hbs
 ├── layouts
-│   └── main.hbs
+│   └── main.hbs
 ├── partials
 └── users
     ├── buyer
-    │   ├── buyItem.hbs
-    │   ├── checkout.hbs
-    │   ├── getAllItems.hbs
-    │   ├── viewCart.hbs
-    │   └── viewItem.hbs
+    │   ├── buyItem.hbs
+    │   ├── checkout.hbs
+    │   ├── getAllItems.hbs
+    │   ├── viewCart.hbs
+    │   └── viewItem.hbs
     ├── seller
-    │   ├── addItem.hbs
-    │   ├── editItem.hbs
-    │   ├── getAllItems.hbs
-    │   └── getItem.hbs
+    │   ├── addItem.hbs
+    │   ├── editItem.hbs
+    │   ├── getAllItems.hbs
+    │   └── getItem.hbs
     ├── transactions.hbs
     └── userHome.hbs
 ```
