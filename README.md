@@ -5,7 +5,7 @@ This was a project I did as I learnt full-stack web development.
 This project was done with NodeJS running the backend and MySQL running the database.  
 Technologies used:  
 
-| Stack componoent|Technology|
+|Stack componoent|Technology|
 |:---|:---|
 |Front-End|HTML, CSS, JS Bootstrap-Vue, VueJS|
 |Back-End|ExpressJS (running off NodeJS), express-handlebars (view engine),<br>mysql (JS lib to talk to MySQL database), passportJS (authentication)|
@@ -100,7 +100,7 @@ This should how your file directories should look like.
         └── ...
 ```
 
-### Breif description
+#### Breif descriptions
 
 The `app.js` file is the main file that runs the server. In it, the file calls the other dependencies and files for the server to start.
 
@@ -178,6 +178,15 @@ views/
     ├── transactions.hbs
     └── userHome.hbs
 ```
+
+### Database
+
+Below is a diagram of the database design  
+![db-diagram](read_content/database_design.png)
+
+#### Brief Description
+
+
 
 # LICENSE
 
