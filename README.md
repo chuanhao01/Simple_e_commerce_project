@@ -1,5 +1,7 @@
 # Simple_e_commerce_project
 
+**This project has been archived as of 27/09/2020**
+
 This was a project I did as I learnt full-stack web development.  
 
 This project was done with NodeJS running the backend and MySQL running the database.  
